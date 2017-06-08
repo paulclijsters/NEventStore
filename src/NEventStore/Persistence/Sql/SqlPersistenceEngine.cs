@@ -186,8 +186,7 @@ namespace NEventStore.Persistence.Sql
             Logger.Debug(Messages.GettingUndispatchedCommits);
             return
                 ExecuteQuery(query => query.ExecutePagedQuery(_dialect.GetUndispatchedCommits, (q, r) => { }))
-                    .Select(x => x.GetCommit(_serializer, _dialect))
-                    .ToArray(); // avoid paging
+                    .Select(x => x.GetCommit(_serializer, _dialect));
         }
 
         public virtual void MarkCommitAsDispatched(ICommit commit)
